@@ -1,26 +1,50 @@
 package com.clases;
 
-public abstract class ProductoElectrodomestico {
+import java.util.Objects;
+
+public abstract class Producto {
     
     private String nombre;
     private int precio;
     private int cantidadDisponible;
 
-    public ProductoElectrodomestico(String n, int p) {
+    public Producto(String n, int p) {
         nombre = n;
         precio = p;
         cantidadDisponible = 0;
     }
 
-    public ProductoElectrodomestico(String n, int p, int c) {
+    public Producto(String n, int p, int c) {
         this(n, p);
         cantidadDisponible = c;
+    }
+
+    public boolean realizarVenta(int cantidad) {
+        if(cantidad > cantidadDisponible)
+            return false;
+        cantidadDisponible -= cantidad;
+        return true;
     }
 
     public String mostrarInformacion() {
         return "Nombre: " + nombre + "\n" +
         "Precio: " + precio + "\n" +
         "Cantidad disponbile: " + cantidadDisponible;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if(obj == null || getClass() != obj.getClass())
+            return false;
+        Producto other = (Producto) obj;
+        return other.getNombre().equals(other.getNombre());
     }
 
     public int getCantidadDisponible() {
