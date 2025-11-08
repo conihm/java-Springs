@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TiendaElectronica {
     private ArrayList<Producto> listaDeProductos;
-
+    
     public TiendaElectronica() {
         listaDeProductos = new ArrayList<>();
     }
@@ -31,6 +31,14 @@ public class TiendaElectronica {
         for(Producto p : listaDeProductos) {
             if(p.getNombre().equals(nombre))
                 return p;
+        }
+        return null;
+    }
+
+    public String mostrarProducto(String nombre) {
+        for(Producto p : listaDeProductos) {
+            if(p.getNombre().equals(nombre))
+                return p.mostrarInformacion();
         }
         return null;
     }

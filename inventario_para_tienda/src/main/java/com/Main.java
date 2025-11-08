@@ -41,14 +41,30 @@ public class Main {
 
         System.out.println("+++++++++++++++\n");
          //REALIZAR VENTAS
-        for(Producto p : inventarioInicial) {
-            System.out.println(tienda.agregarProducto(p) ? "Agregado con éxito" : "No pudo agregarse");
-        }
+        if(tienda.realizarVenta(1, "Televisor Pequeño 32\"")) {
+           System.out.println("Venta realizada con éxito");
+        } else
+            System.out.println("No pudo realizarse la venta");
+        System.out.println(tienda.mostrarProducto("Televisor Pequeño 32\""));
+        System.out.println("+++++++++++++++\n");
+
+
+        if(tienda.realizarVenta(3, "Pantalla Gigante 8K")) { //No realizada pro exceder unidades
+           System.out.println("Venta realizada con éxito");
+        } else
+            System.out.println("No pudo realizarse la venta");
+        System.out.println(tienda.mostrarProducto("Pantalla Gigante 8K"));
+        System.out.println("+++++++++++++++\n");
+
+
+        System.out.println("+++++++++++++++\n");
+        //AGREGAR PRODUCTO REPETIDO
+        Televisor t = new Televisor("Pantalla Gigante 8K", 20, 12, "4HD");
+        System.out.println(tienda.agregarProducto(t) ? "Agregado con éxito" : "No pudo agregarse");
+
+        System.out.println("+++++++++++++++\n");
+        //MOSTRAR LISTADO COMPLETO
+        System.out.println(tienda.mostrarListaCompleta());
 
     }
-
-    /*
-Realiza algunas ventas y verifica que la cantidad disponible de los productos se actualice correctamente.
-Muestra todos los productos disponibles en el inventario para verificar que se agregaron correctamente.
-     */
 }
