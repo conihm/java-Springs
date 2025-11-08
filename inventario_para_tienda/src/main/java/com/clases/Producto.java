@@ -1,22 +1,22 @@
 package com.clases;
-
 import java.util.Objects;
 
 public abstract class Producto {
     
     private String nombre;
-    private int precio;
+    private double precio;
     private int cantidadDisponible;
 
-    public Producto(String n, int p) {
-        nombre = n;
-        precio = p;
+
+    public Producto(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
         cantidadDisponible = 0;
     }
 
-    public Producto(String n, int p, int c) {
-        this(n, p);
-        cantidadDisponible = c;
+    public Producto(String nombre, double precio, int cantidadDisponible) {
+        this(nombre, precio);
+        this.cantidadDisponible = cantidadDisponible;
     }
 
     public boolean realizarVenta(int cantidad) {
@@ -44,7 +44,7 @@ public abstract class Producto {
         if(obj == null || getClass() != obj.getClass())
             return false;
         Producto other = (Producto) obj;
-        return other.getNombre().equals(other.getNombre());
+        return other.getNombre().equalsIgnoreCase(nombre);
     }
 
     public int getCantidadDisponible() {
@@ -55,7 +55,7 @@ public abstract class Producto {
         return nombre;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
@@ -67,7 +67,7 @@ public abstract class Producto {
         this.nombre = nombre;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 }

@@ -1,26 +1,27 @@
 package com.clases;
 
-public class ComputadoraPortatil extends ProductoElectrodomestico {
-    private String marca,  memoriaRAM;
-    private int numeroSerie;
+public class ComputadoraPortatil extends Producto {
+    private String marca,  numeroSerie;
+    private int memoriaRAM;
 
-    public ComputadoraPortatil(String n, int p, String m, String me, int num) {
-        super(n, p);
-        marca = m;
-        memoriaRAM = me;
-        numeroSerie = num;
+    public ComputadoraPortatil(String nombre, double precio, String marca, int memoriaRAM, String numeroSerie) {
+        super(nombre, precio);
+        this.marca = marca;
+        this.memoriaRAM = memoriaRAM;
+        this.numeroSerie = numeroSerie;
     }
 
-    public ComputadoraPortatil(String n, int p, String m, String me, int num, int c) {
-        super(n, p, c);
-        marca = m;
-        memoriaRAM = me;
-        numeroSerie = num;
+     public ComputadoraPortatil(String nombre, double precio, String marca, int memoriaRAM, String numeroSerie, int cantidadDisponible) {
+        super(nombre, precio, cantidadDisponible);
+        this.marca = marca;
+        this.memoriaRAM = memoriaRAM;
+        this.numeroSerie = numeroSerie;
     }
 
     @Override
     public String mostrarInformacion() {
-        return super.mostrarInformacion() + "\n" +
+        return getClass().getSimpleName() + "\n" + 
+        super.mostrarInformacion() + "\n" +
         "Marca: " + marca + "\n" + 
         "Memoria RAM: " + memoriaRAM + "\n" + 
         "Número de serie: " + numeroSerie;
@@ -30,11 +31,11 @@ public class ComputadoraPortatil extends ProductoElectrodomestico {
         return marca;
     }
 
-    public String getMemoriaRAM() {
+    public int getMemoriaRAM() {
         return memoriaRAM;
     }
 
-    public int getNumeroSerie() {
+    public String getNumeroSerie() {
         return numeroSerie;
     }
 
@@ -42,11 +43,11 @@ public class ComputadoraPortatil extends ProductoElectrodomestico {
         this.marca = marca;
     }
 
-    public void setMemoriaRAM(String memoriaRAM) {
+    public void setMemoriaRAM(int memoriaRAM) {
         this.memoriaRAM = memoriaRAM;
     }
 
-    public void setNumeroSerie(int numeroSerie) {
+    public void setNumeroSerie(String numeroSerie) {
         this.numeroSerie = numeroSerie;
     }
 }

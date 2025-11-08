@@ -1,25 +1,26 @@
 package com.clases;
 
-public class Televisor extends ProductoElectrodomestico {
+public class Televisor extends Producto {
     
-    private String tamañoPantalla;
+    private int tamañoPantalla;
     private String resolucion;
 
-    public Televisor(String n, int p, String t, String r) {
-        super(n, p);
-        tamañoPantalla = t;
-        resolucion = r;
+    public Televisor(String nombre, double precio, int tamañoPantalla, String resolucion) {
+        super(nombre, precio);
+        this.tamañoPantalla = tamañoPantalla;
+        this.resolucion = resolucion;
     }
     
-    public Televisor(String n, int p, int c, String t, String r) {
-        super(n, p, c);
-        tamañoPantalla = t;
-        resolucion = r;
+    public Televisor(String nombre, double precio, int tamañoPantalla, String resolucion, int cantidadDisponible) {
+        super(nombre, precio, cantidadDisponible);
+        this.tamañoPantalla = tamañoPantalla;
+        this.resolucion = resolucion;
     }
 
     @Override
     public String mostrarInformacion() {
-        return super.mostrarInformacion() + "\n" +
+        return getClass().getSimpleName() + "\n" + 
+        super.mostrarInformacion() + "\n" +
         "Tamaño de pantalla: " + tamañoPantalla + "\n" +
         "Resolución: " + resolucion;
     }
@@ -28,7 +29,7 @@ public class Televisor extends ProductoElectrodomestico {
         return resolucion;
     }
 
-    public String getTamañoPantalla() {
+    public int getTamañoPantalla() {
         return tamañoPantalla;
     }
 
@@ -36,7 +37,7 @@ public class Televisor extends ProductoElectrodomestico {
         this.resolucion = resolucion;
     }
 
-    public void setTamañoPantalla(String tamañoPantalla) {
+    public void setTamañoPantalla(int tamañoPantalla) {
         this.tamañoPantalla = tamañoPantalla;
     }
 }
