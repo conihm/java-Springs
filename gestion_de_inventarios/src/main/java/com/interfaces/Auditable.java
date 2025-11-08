@@ -2,4 +2,6 @@ package com.interfaces;
 
 public interface Auditable {
     
-    public registraAccion(String accion);
+    public void registraAccion(String accion);
+    
+}

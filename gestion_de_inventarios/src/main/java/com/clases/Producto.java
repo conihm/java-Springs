@@ -14,8 +14,22 @@ public class Producto implements Validable {
     }
 
     @Override
-    public void validarInformacion() {
-       
+    public boolean validarInformacion() {
+        if (this.idProducto == null || this.idProducto.isEmpty()) {
+            System.out.println("VALIDACIÓN FALLIDA (Producto): El ID está vacío.");
+            return false;
+        }
+        if (this.nombre == null || this.nombre.isEmpty()) {
+            System.out.println("VALIDACIÓN FALLIDA (Producto): El nombre está vacío.");
+            return false;
+        }
+        if (this.precio <= 0) {
+            System.out.println("VALIDACIÓN FALLIDA (Producto): El precio debe ser positivo.");
+            return false;
+        }
+        
+        System.out.println("VALIDACIÓN EXITOSA (Producto): " + this.nombre);
+        return true; // Si pasó todas las pruebas
     }
 
     public String getIdProducto() {

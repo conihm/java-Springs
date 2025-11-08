@@ -15,8 +15,7 @@ public class Transaccion implements Auditable {
 
     @Override
     public void registraAccion(String accion) {
-        
-        
+        System.out.println("AUDITORÍA [Transacción " + idTransaccion + "]: " + accion);
     }
 
     public String getIdTransaccion() {
