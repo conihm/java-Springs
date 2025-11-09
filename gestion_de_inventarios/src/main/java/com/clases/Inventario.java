@@ -1,16 +1,25 @@
 package com.clases;
-
+import java.util.ArrayList;
 import java.util.List;
-
 import com.interfaces.Auditable;
 import com.interfaces.Validable;
 
 public class Inventario implements Validable, Auditable {
 
     private List<Producto> productos;
+    private List<String> acciones;
 
     public Inventario(List<Producto> productos) {
         this.productos = productos;
+        this.acciones = new ArrayList<String>();
+    }
+
+    public String listarInventario() {
+        String lista = "";
+        for(Producto p : productos) {
+            lista += p.toString();
+        }
+        return lista;
     }
 
     public boolean agregarProducto(Producto producto) {
@@ -31,19 +40,27 @@ public class Inventario implements Validable, Auditable {
         return null;
     }
 
-    public Producto eliminarProducto(Producto producto) {
+    public boolean eliminarProducto(Producto producto) {
         for(Producto p : productos) {
-            if(p.getIdProducto().equals(producto.getIdProducto())) {
+            if(producto != null && p.getIdProducto().equals(producto.getIdProducto())) {
                 productos.remove(p);
-                return p;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     @Override
     public void registraAccion(String accion) {
+        acciones.add(accion);  
         System.out.println("AUDITORÍA [Inventario]: " + accion);
+    }
+
+    public void imprimirAcciones() {
+        System.out.println("--AUDITORÍA--");
+        for(String a : acciones) {
+            System.out.println("-->" + a + "\n");
+        }
     }
 
     @Override

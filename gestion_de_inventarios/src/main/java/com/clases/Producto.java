@@ -1,16 +1,24 @@
 package com.clases;
 
+
 import com.interfaces.Validable;
 
 public class Producto implements Validable {
     
     private String idProducto, nombre;
     private double precio;
-
+    
     public Producto(String idProducto, String nombre, double precio){
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.precio = precio;
+    }
+    
+    @Override
+    public String toString() {
+        return "IDProducto: " + idProducto + "\n" +
+        "Nombre: " + nombre + "\n" +
+        "Precio: " + precio + "\n++++\n";
     }
 
     @Override
@@ -29,7 +37,7 @@ public class Producto implements Validable {
         }
         
         System.out.println("VALIDACIÓN EXITOSA (Producto): " + this.nombre);
-        return true; // Si pasó todas las pruebas
+        return true;
     }
 
     public String getIdProducto() {
@@ -55,5 +63,4 @@ public class Producto implements Validable {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
-
 }
