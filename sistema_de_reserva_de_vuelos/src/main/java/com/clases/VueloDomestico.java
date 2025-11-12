@@ -16,11 +16,8 @@ public class VueloDomestico extends Vuelo {
 
     @Override
     public void mostrarInformacionDeVuelo() {
-        System.out.println("Número de vuelo: " + getNumeroVuelo() + "\n" +
-        "Origen: " + getOrigen() + "\n" +
-        "Destino: " + getOrigen() + "\n" +
-        "Duración: " + getDuracion() + "\n" +
-        "Descuento: " + descuento);
+        super.mostrarInformacionDeVuelo();
+        System.out.println("Descuento: " + descuento + "\n");
     }
     
 }
