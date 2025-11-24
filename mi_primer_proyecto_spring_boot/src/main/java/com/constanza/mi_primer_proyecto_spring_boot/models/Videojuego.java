@@ -7,7 +7,8 @@ public class Videojuego {
     private String nombre, descripcion, portada;
     private LocalDate fechaLanzamiento;
     private Double rating;
-    private ArrayList<String> generos, plataformas;
+    //private ArrayList<String> generos, plataformas;
+    private Long id;
     
     
     public Videojuego() {
@@ -16,25 +17,45 @@ public class Videojuego {
 
     
     
-    @Override
+   /*  @Override
     public String toString() {
         return "Videojuego [nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
                 + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", generos=" + generos
                 + ", plataformas=" + plataformas + "]";
-    }
+    }*/
+
+    
 
 
 
-    public Videojuego(String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating,
+    public Videojuego(Long id, String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating,
             ArrayList<String> generos, ArrayList<String> plataformas) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.portada = portada;
         this.fechaLanzamiento = fechaLanzamiento;
         this.rating = rating;
-        this.generos = generos;
-        this.plataformas = plataformas;
+        //this.generos = generos;
+        //this.plataformas = plataformas;
+        this.id = id;
     }
+
+    public Videojuego(Long id, String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.portada = portada;
+        this.fechaLanzamiento = fechaLanzamiento;
+        this.rating = rating;
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Videojuego [nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
+                + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", id=" + id + "]";
+    }
+
+
 
     public String getNombre() {
         return nombre;
@@ -76,6 +97,22 @@ public class Videojuego {
         this.rating = rating;
     }
 
+
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
+
+    /*
+
     public ArrayList<String> getGeneros() {
         return generos;
     }
@@ -92,7 +129,7 @@ public class Videojuego {
         this.plataformas = plataformas;
     }
 
-    
+    */
 
     
 }
