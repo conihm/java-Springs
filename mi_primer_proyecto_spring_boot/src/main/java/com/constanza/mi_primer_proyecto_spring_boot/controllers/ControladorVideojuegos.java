@@ -3,6 +3,7 @@ package com.constanza.mi_primer_proyecto_spring_boot.controllers;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@RestController
+@Controller
 //Requestmapping par agregar subrutas
 //@RequestMapping("/mensajes")
 public class ControladorVideojuegos implements ManejoDeFechas {
@@ -74,6 +75,12 @@ public class ControladorVideojuegos implements ManejoDeFechas {
 	public String getVideojuegoPorNombreV2(@PathVariable("nombre") String nombre) {
 		return buscar(nombre).toString();
 	}
+
+	@GetMapping("pruebas")
+	public String pruebas() {
+		return "pruebas.jsp";
+	}
+	
 	
 
 
