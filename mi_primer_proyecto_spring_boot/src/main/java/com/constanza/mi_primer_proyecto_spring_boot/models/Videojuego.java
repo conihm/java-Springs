@@ -14,8 +14,7 @@ public class Videojuego {
     public Videojuego() {
 
     }
-
-    
+  
     
    /*  @Override
     public String toString() {
@@ -25,8 +24,6 @@ public class Videojuego {
     }*/
 
     
-
-
 
     public Videojuego(Long id, String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating,
             ArrayList<String> generos, ArrayList<String> plataformas) {
@@ -51,10 +48,9 @@ public class Videojuego {
 
     @Override
     public String toString() {
-        return "Videojuego [nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
-                + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", id=" + id + "]";
+        return "Videojuego [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
+                + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + "]";
     }
-
 
 
     public String getNombre() {
@@ -98,11 +94,9 @@ public class Videojuego {
     }
 
 
-
     public Long getId() {
         return id;
     }
-
 
 
     public void setId(Long id) {
@@ -110,7 +104,6 @@ public class Videojuego {
     }
 
     
-
     /*
 
     public ArrayList<String> getGeneros() {

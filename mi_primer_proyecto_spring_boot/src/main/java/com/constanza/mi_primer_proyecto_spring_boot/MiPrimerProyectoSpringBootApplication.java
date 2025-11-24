@@ -12,7 +12,5 @@ public class MiPrimerProyectoSpringBootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MiPrimerProyectoSpringBootApplication.class, args);
 	}
-
-		
 		
 }

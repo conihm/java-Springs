@@ -6,14 +6,21 @@
     <head>
         <meta charset ="ISO-8859-1">
         <title>Videojuegos</title>
+        <link rel = "stylesheet" href = "/css/styles.css">
     </head>
     <body>
+        <a href="/form/add">Crear Videojuegos</a>
         <h1>Videojuegos:  </h1>
         <ul>
             <c:forEach var="juego" items="${videojuegos}">
-                <li>Nombre: <b>${juego.nombre}</b>, Fecha lanzamiento: <b>${juego.fechaLanzamiento}</b></li>
+                <img src="${juego.portada}" width = "200px"/>,
+                Nombre: <b>${juego.nombre}</b>, 
+                Fecha lanzamiento: <b>${juego.fechaLanzamiento}</b>,
+                <a href="detail/${juego.id}">Detalles</a>
+                </li>
             </c:forEach>
         </ul>
+        <script src="/js/script.js"></script>
     </body>
 
 </html>

@@ -6,10 +6,12 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>Agregar Videojuego</title>
+        <link rel = "stylesheet" href = "/css/styles.css">
+
     </head>
     <body>
         <h1>Agregar Videojuego: </h1>
-        <form action=/add methods = "POST">
+        <form action=/add method = "POST">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre">
 
