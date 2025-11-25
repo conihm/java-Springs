@@ -1,11 +1,13 @@
 package com.constanzahurtado.libros_y_autores.controllers;
 
 import java.util.HashMap;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -27,6 +29,17 @@ public class ControladorLibros {
         modelo.addAttribute("listaLibros", listaLibros);
         return "libros.jsp";
     }
-    
 
+    @GetMapping("/libros/{nombre}")
+    public String obtenerInformacionDeLibro(@PathVariable("nombre") String nombre, Model modelo) {
+        if(listaLibros.containsKey(nombre)) {
+            modelo.addAttribute("nombre", nombre);
+            modelo.addAttribute("autor", listaLibros.get(nombre));
+        } else {
+            modelo.addAttribute("mensaje", "El libro no se encuentra en nuestra lista.");
+        }
+
+        return "detalleLibro.jsp";
+    }
+    
 }
