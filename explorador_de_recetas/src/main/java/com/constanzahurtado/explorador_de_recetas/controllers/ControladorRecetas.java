@@ -44,34 +44,4 @@ public class ControladorRecetas {
 		return "detalleReceta.jsp";
     }
 
-
-    /*
-    public String obtenerInformacionDeLibro(@PathVariable String nombre, Model modelo) {
-		if(listaLibros.containsKey(nombre)) {
-			modelo.addAttribute("nombreLibro", nombre);
-			modelo.addAttribute("nombreAutor", listaLibros.get(nombre));
-		} else {
-			modelo.addAttribute("mensaje", "El libro no se encuentra en nuestra lista.");
-		}
-		
-		return "detalleLibro.jsp";
-	}
-	
-	@GetMapping("/libro/formulario")
-	public String formularioLibro() {
-		return "formularioLibros.jsp";
-	}
-	
-	@PostMapping("/procesa/libros")
-	public String procesaLibro(@RequestParam String nombreLibro,
-							   @RequestParam String nombreAutor) {
-		listaLibros.put(nombreLibro, nombreAutor);
-		return "redirect:/libros";
-	}
-	 */
-    
-
-    
-
-
 }
