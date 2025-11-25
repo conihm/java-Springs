@@ -1,5 +1,6 @@
 package com.constanza.mi_primer_proyecto_spring_boot.controllers;
 
+
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ControladorUsuarios {
 
-    private ArrayList<Usuario> usuarios;    
+    private ArrayList<Usuario> usuarios;
 
     public ControladorUsuarios() {
         this.usuarios = new ArrayList<>();
@@ -35,9 +36,9 @@ public class ControladorUsuarios {
 
     @PostMapping("/login")
     public String login(@RequestParam String email,
-                        @RequestParam String password,
-                        HttpSession session,
-                        RedirectAttributes flash) {
+            @RequestParam String password,
+            HttpSession session,
+            RedirectAttributes flash) {
 
         Usuario usuario = buscar(email);
         if (usuario == null) {
@@ -53,12 +54,12 @@ public class ControladorUsuarios {
     }
 
     @PostMapping("/register")
-    public String register( @RequestParam String nombre,
-                            @RequestParam String apellido,
-                            @RequestParam String email,
-                            @RequestParam String password,
-                            HttpSession session,
-                            RedirectAttributes flash) {
+    public String register(@RequestParam String nombre,
+            @RequestParam String apellido,
+            @RequestParam String email,
+            @RequestParam String password,
+            HttpSession session,
+            RedirectAttributes flash) {
 
         if (password.length() < 4) {
             flash.addFlashAttribute("errorLongitudPassword", "La contraseña debe contener más de 4 caracteres.");

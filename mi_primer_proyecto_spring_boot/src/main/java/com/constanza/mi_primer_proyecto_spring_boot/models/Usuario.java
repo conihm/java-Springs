@@ -1,8 +1,6 @@
 package com.constanza.mi_primer_proyecto_spring_boot.models;
 
-
 public class Usuario {
-    
     private Long id;
     private String nombre;
     private String apellido;

@@ -4,23 +4,36 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset ="ISO-8859-1">
+        <meta charset="ISO-8859-1">
         <title>Videojuegos</title>
-        <link rel = "stylesheet" href = "/css/styles.css">
+        <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
-        <a href="/form/add">Crear Videojuegos</a>
-        <h1>Videojuegos:  </h1>
-        <ul>
-            <c:forEach var="juego" items="${videojuegos}">
-                <img src="${juego.portada}" width = "200px"/>,
-                Nombre: <b>${juego.nombre}</b>, 
-                Fecha lanzamiento: <b>${juego.fechaLanzamiento}</b>,
-                <a href="detail/${juego.id}">Detalles</a>
-                </li>
-            </c:forEach>
-        </ul>
+        <div class="nav">
+			<h3>¡Bienvenido/a ${usuario.nombre} ${usuario.apellido}!</h3>
+            <a href="/form/add">Crear Videojuego</a>
+			<a href="/logout">Salir</a>
+        </div>
+        <div class="content">
+	        <div class="vPlataforma">
+	            <h1>Mis Videojuegos</h1>
+	            <ul class="videojuegos">
+	            </ul>
+	        </div>
+	        <div class="vComunidad">
+	            <h1>Videojuegos de la Comunidad</h1>
+	            <ul class="videojuegos">
+		            <c:forEach var="juego" items="${videojuegos}">
+			            <li>
+			                <img src="${juego.portada}"/>
+			                <h3>${juego.nombre}</h3>
+			                <a href="/detail/${juego.id}">Detalles</a>
+				            <%-- <a class="precio" href="/buy/${juego.id}">$${juego.precio}</a> --%>
+			            </li>
+		            </c:forEach>
+	            </ul>
+	        </div>
+        </div>
         <script src="/js/script.js"></script>
     </body>
-
 </html>
