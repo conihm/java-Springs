@@ -6,27 +6,27 @@
         <meta charset="UTF-8">
         <title>Detalle libro</title>
     </head>
-<body>
-	<h1>Detalle libro</h1>	
-	<c:if test="${not empty mensaje}">
-		<p>
-			<c:out value="${mensaje}"></c:out>
-		</p>
-	</c:if>
-	
-	<c:if test="${empty mensaje}">
-		<p>
-			Nombre libro: 
-			<c:out value="${nombre}" />			
-		</p>
-		
-		<p>
-			Autor: 
-			<c:out value="${autor}" />			
-		</p>
-	</c:if>
-	
-	<a href="/libros">Volver a la lista de libros</a>
-	
-</body>
+    <body>
+        <h1>Detalle libro</h1>	
+        <c:if test="${not empty mensaje}">
+            <p>
+                <c:out value="${mensaje}"></c:out>
+            </p>
+        </c:if>
+        
+        <c:if test="${empty mensaje}">
+            <p>
+                Nombre libro: 
+                <c:out value="${nombre}" />			
+            </p>
+            
+            <p>
+                Autor: 
+                <c:out value="${autor}" />			
+            </p>
+        </c:if>
+        
+        <a href="/libros">Volver a la lista de libros</a>
+        
+    </body>
 </html>
