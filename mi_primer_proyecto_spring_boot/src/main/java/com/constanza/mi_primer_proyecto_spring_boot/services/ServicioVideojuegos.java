@@ -18,7 +18,7 @@ public class ServicioVideojuegos {
         return (List<Videojuego>) this.repositorioVideojuegos.findAll();
     }
 
-    public Videojuego obtenerPorID(Long id) {
+    public Videojuego obtenerPorId(Long id) {
         return this.repositorioVideojuegos.findById(id).orElse(null);
     }
 

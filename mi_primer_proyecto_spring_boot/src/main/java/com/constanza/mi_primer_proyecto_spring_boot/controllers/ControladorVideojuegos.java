@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +22,9 @@ import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioVideojuegos
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class ControladorVideojuegos implements ManejoDeFechas {
@@ -141,9 +145,48 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         if (usuario == null) {
             return "redirect:/";
         }
-        Videojuego juego = servicioVideojuegos.obtenerPorID(id);
+        Videojuego juego = servicioVideojuegos.obtenerPorId(id);
         modelo.addAttribute("videojuego", juego);
         return "detalle.jsp";
     }
+
+    @GetMapping("/form/edit/{id}")
+    public String formEditar(   HttpSession session, 
+                                Model modelo, 
+                                @PathVariable("id") Long id) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return "redirect:/";
+        }
+        modelo.addAttribute("videojuego", servicioVideojuegos.obtenerPorId(id));
+        return "editar.jsp";
+    }
+
+    @PutMapping("/edit")
+    public String actualizarVideojuego( @Valid @ModelAttribute("videojuego") Videojuego videojuego,
+                                        BindingResult validaciones,
+                                        HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return "redirect:/";
+        }
+        if(validaciones.hasErrors())
+            return "editar.jsp";
+        this.servicioVideojuegos.actualizarVideojuego(videojuego);
+        return "redirect:/getAll";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String eliminarVideojuego(@PathVariable("id") Long id, HttpSession session) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return "redirect:/";
+        }
+        this.servicioVideojuegos.eliminarVideojuego(id);
+        return "redirect:/getAll";
+
+    }
+
+    
 
 }
