@@ -3,6 +3,7 @@ package com.constanza.mi_primer_proyecto_spring_boot.controllers;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,17 +11,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.constanza.mi_primer_proyecto_spring_boot.models.Usuario;
+import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioUsuarios;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ControladorUsuarios {
 
-    private ArrayList<Usuario> usuarios;
+    @Autowired
+    private ServicioUsuarios servicioUsuarios;
 
-    public ControladorUsuarios() {
-        this.usuarios = new ArrayList<>();
-    }
 
     @GetMapping("/")
     public String inicio(HttpSession session) {
@@ -40,7 +40,7 @@ public class ControladorUsuarios {
             HttpSession session,
             RedirectAttributes flash) {
 
-        Usuario usuario = buscar(email);
+        Usuario usuario = servicioUsuarios.obtenerUsuarioPorEmail(email);
         if (usuario == null) {
             return "login.jsp";
         }
@@ -65,24 +65,23 @@ public class ControladorUsuarios {
             flash.addFlashAttribute("errorLongitudPassword", "La contraseña debe contener más de 4 caracteres.");
             return "redirect:/";
         }
-        Usuario usuario = buscar(email);
+        
+        Usuario usuario = servicioUsuarios.obtenerUsuarioPorEmail(email);
         if (usuario == null) {
-            long nuevoId = this.usuarios.size() + 1;
-            Usuario newUser = new Usuario(nuevoId, nombre, apellido, email, password);
-            this.usuarios.add(newUser);
-            usuario = newUser;
+            Usuario newUser = new Usuario(nombre, apellido, email, password);
+            usuario = servicioUsuarios.crearUsuario(newUser);
         }
         usuario.setPassword("");
         session.setAttribute("usuario", usuario);
         return "redirect:/getAll";
     }
 
-    private Usuario buscar(String email) {
+    /*private Usuario buscar(String email) {
         Usuario user = null;
         for (Usuario u : this.usuarios) {
             if (u.getEmail().equalsIgnoreCase(email))
                 user = u;
         }
         return user;
-    }
+    }*/
 }

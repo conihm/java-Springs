@@ -14,15 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.constanza.mi_primer_proyecto_spring_boot.interfaces.ManejoDeFechas;
 import com.constanza.mi_primer_proyecto_spring_boot.models.Usuario;
 import com.constanza.mi_primer_proyecto_spring_boot.models.Videojuego;
+import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioVideojuegos;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ControladorVideojuegos implements ManejoDeFechas {
 
-    private ArrayList<Videojuego> videojuegos;
+    private ServicioVideojuegos servicioVideojuegos;
 
-    public ControladorVideojuegos() {
+   //private ArrayList<Videojuego> videojuegos;
+
+    /*public ControladorVideojuegos() {
         this.videojuegos = new ArrayList<>();
         Videojuego v1 = new Videojuego(1l, "Silent Hill 2",
                 "Having received a letter from his deceased wife, James heads to where they shared so many memories, in the hope of seeing her one more time: Silent Hill.",
@@ -39,7 +42,7 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         this.videojuegos.add(v1);
         this.videojuegos.add(v2);
         this.videojuegos.add(v3);
-    }
+    }*/
 
     @GetMapping("/getAll")
     public String getVideojuegos(Model modelo, HttpSession session) {
@@ -48,18 +51,18 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         if (usuario == null) {
             return "redirect:/";
         }
-        modelo.addAttribute("videojuegos", this.videojuegos);
+        modelo.addAttribute("videojuegos", servicioVideojuegos.obtenerTodosLosVideojuegos());
         return "videojuegos.jsp";
     }
 
-    private Videojuego buscar(Long id) {
+    /*private Videojuego buscar(Long id) {
         Videojuego v = null;
         for (Videojuego videojuego : this.videojuegos) {
             if (videojuego.getId() == id)
                 v = videojuego;
         }
         return v;
-    }
+    }*/
 
     @GetMapping("/form/add")
     public String formAgregar(HttpSession session) {
@@ -81,6 +84,26 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         if (usuario == null) {
             return "redirect:/";
         }
+        Videojuego newJuego = new Videojuego(
+                nombre,
+                descripcion,
+                portada,
+                LocalDate.parse(fecha_lanzamiento),
+                Double.parseDouble(rating),
+                0.0);
+        servicioVideojuegos.crearVideojuego(newJuego);
+        return "redirect:/getAll";
+    }
+    /*public String guardar(@RequestParam String nombre,
+            @RequestParam String descripcion,
+            @RequestParam String portada,
+            @RequestParam String fecha_lanzamiento,
+            @RequestParam String rating, HttpSession session) {
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return "redirect:/";
+        }
         long nuevoId = this.videojuegos.size() + 1;
         Videojuego juego = new Videojuego(nuevoId,
                 nombre,
@@ -90,7 +113,7 @@ public class ControladorVideojuegos implements ManejoDeFechas {
                 Double.parseDouble(rating));
         this.videojuegos.add(juego);
         return "redirect:/getAll";
-    }
+    }*/
 
     @GetMapping("/detail/{id}")
     public String detalle(@PathVariable("id") Long id, Model modelo, HttpSession session) {
@@ -99,7 +122,7 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         if (usuario == null) {
             return "redirect:/";
         }
-        Videojuego juego = buscar(id);
+        Videojuego juego = servicioVideojuegos.obtenerPorID(id);
         modelo.addAttribute("videojuego", juego);
         return "detalle.jsp";
     }

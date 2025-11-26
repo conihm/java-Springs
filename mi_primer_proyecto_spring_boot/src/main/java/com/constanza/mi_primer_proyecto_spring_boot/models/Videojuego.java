@@ -2,13 +2,49 @@ package com.constanza.mi_primer_proyecto_spring_boot.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
+import org.hibernate.validator.constraints.URL;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+@Entity
+@Table(name = "videojuegos")
 public class Videojuego {
-    private String nombre, descripcion, portada;
-    private LocalDate fechaLanzamiento;
-    private Double rating;
-    //private ArrayList<String> generos, plataformas;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @NotNull(message = "Este campo es obligatorio.")
+    @Size(min = 5, max = 40, message = "Debe contener entre 5 y 40 caracteres.")
+    private String nombre;
+
+    @Size(max = 400, message = "Debe contener menos de 400 caracteres.")
+    private String descripcion;
+    
+    @URL(message = "No es una URL válida.")
+    private String portada;
+    
+    @NotNull(message = "Este campo es obligatorio.")
+    private LocalDate fechaLanzamiento;
+    
+    @Min(value = 1, message = "El valor debe ser al menos 1.")
+    @Max(value = 5, message = "El valor debe ser a lo más 5.")
+    private Double rating;
+    
+    private Double precio;
+    
+    //private ArrayList<String> generos, plataformas;
     
     
     public Videojuego() {
@@ -37,21 +73,15 @@ public class Videojuego {
         this.id = id;
     }
 
-    public Videojuego(Long id, String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating) {
+    public Videojuego(String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating, Double precio) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.portada = portada;
         this.fechaLanzamiento = fechaLanzamiento;
         this.rating = rating;
         this.id = id;
+        this.precio = (precio != 0) ? precio : this.generarPrecioRandom();
     }
-
-    @Override
-    public String toString() {
-        return "Videojuego [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
-                + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + "]";
-    }
-
 
     public String getNombre() {
         return nombre;
@@ -101,6 +131,33 @@ public class Videojuego {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Videojuego [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
+                + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", precio=" + precio + "]";
+    }
+
+    private double generarPrecioRandom() {
+        return Math.round((ThreadLocalRandom.current().nextDouble(5.0, 150.0)) * 100.00 )/ 100.00;
+    }
+
+    @PrePersist
+    public void asignarPrecioAleatorio() {
+        if(precio == null)
+            precio = generarPrecioRandom();
     }
 
     

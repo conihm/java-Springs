@@ -1,21 +1,48 @@
 package com.constanza.mi_primer_proyecto_spring_boot.models;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+
+@Entity
+@Table(name = "usuarios")
+    
 public class Usuario {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Column(nullable = false)
     private String nombre;
+    
+    @Column(nullable = false)
     private String apellido;
+
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+    
+    @Column(nullable = false, columnDefinition = "DOUBLE DEFAULT 200.00")
+    private Double coins;
+
     
     public Usuario() {
     }
 
-    public Usuario(Long id, String nombre, String apellido, String email, String password) {
-        this.id = id;
+    public Usuario(String nombre, String apellido, String email, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.password = password;
+        this.coins = 200.00;
     }
 
     public Long getId() {
@@ -58,9 +85,21 @@ public class Usuario {
         this.password = password;
     }
 
+    
+
+    
+
     @Override
     public String toString() {
         return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
-                + ", password=" + password + "]";
+                + ", password=" + password + ", coins=" + coins + "]";
+    }
+
+    public Double getCoins() {
+        return coins;
+    }
+
+    public void setCoins(Double coins) {
+        this.coins = coins;
     }
 }
