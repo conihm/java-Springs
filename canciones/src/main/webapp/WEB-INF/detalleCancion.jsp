@@ -20,7 +20,12 @@
                         <li>Última actualización: &#160;&#160;<b>${cancion.fechaActualizacion}</b></li>
                     </ul>
             </div>
-            <a href="/canciones">Volver</a>
+            <p>
+                <a href="/canciones">Volver</a>
+            </p>
+              <p>
+                <a href="/canciones/formulario/editar/{id}">Editar</a>
+            </p>
         </div>
     </body>
 </html>

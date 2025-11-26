@@ -6,11 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import com.constanzahurtado.canciones.models.Cancion;
 import com.constanzahurtado.canciones.services.ServicioCanciones;
+
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -48,6 +53,23 @@ public class ControladorCanciones {
             return "agregarCancion.jsp";
         }
         this.servicioCanciones.agregarCancion(cancion);
+        return "redirect:/canciones";
+    }
+
+    @GetMapping("/canciones/formulario/editar/{id}")
+    public String formularioEditarCancion(Model model, @PathVariable("id") Long id) {
+        model.addAttribute("cancion", this.servicioCanciones.obtenerCancionPorId(id));
+        return "editarCancion.jsp";
+    }
+
+    @PutMapping("/canciones/procesa/editar/{id}")
+    public String procesarEditarCancion(@Valid @ModelAttribute("cancion") Cancion cancion,
+            BindingResult validaciones) {
+
+        if (validaciones.hasErrors()) {
+            return "editarCancion.jsp";
+        }
+        this.servicioCanciones.actualizarCancion(cancion);
         return "redirect:/canciones";
     }
     
