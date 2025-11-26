@@ -16,7 +16,7 @@
 		            <c:forEach var="cancion" items="${canciones}">
 			            <li>
 			                <h3>${cancion.titulo}</h3>
-			                <a href="/detail/${cancion.id}">Detalles</a>
+			                <a href="/canciones/detalles/${cancion.id}">Detalles</a>
 			            </li>
 		            </c:forEach>
 	            </ul>

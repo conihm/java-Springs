@@ -24,6 +24,8 @@ public class ControladorCanciones {
     @GetMapping("/canciones/detalles/{id}")
     public String desplegarDetalleCancion(@PathVariable Long id, Model modelo) {
         Cancion cancion = this.servicioCanciones.obtenerCancionPorId(id);
+        if(cancion == null)
+            return "redirect:/canciones";
         modelo.addAttribute("cancion", cancion);
         return "detalleCancion.jsp";
     }

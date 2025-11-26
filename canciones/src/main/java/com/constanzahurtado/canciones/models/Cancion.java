@@ -2,7 +2,8 @@ package com.constanzahurtado.canciones.models;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.Id;
 
 
 @Entity
@@ -22,7 +24,7 @@ public class Cancion {
     private Long id;
 
     @Column(nullable = false)
-    private String nombre;
+    private String titulo;
 
     @Column(nullable = false)
     private String artista;
@@ -36,9 +38,11 @@ public class Cancion {
     @Column(nullable = false)
     private String idioma;
 
-    @Column(name = "fecha_creacion")
+    @CreatedDate
+    @Column(name = "fecha_creacion", updatable = false)
     private LocalDateTime fechaCreacion;
 
+    @LastModifiedDate
     @Column(name = "fecha_actualizacion")
     private LocalDateTime fechaActualizacion;
     
@@ -46,8 +50,8 @@ public class Cancion {
 
     }
 
-    public Cancion(String nombre, String artista, String album, String genero, String idioma) {
-        this.nombre = nombre;
+    public Cancion(String titulo, String artista, String album, String genero, String idioma) {
+        this.titulo = titulo;
         this.artista = artista;
         this.album = album;
         this.genero = genero;
@@ -72,12 +76,12 @@ public class Cancion {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getArtista() {
@@ -130,7 +134,7 @@ public class Cancion {
 
     @Override
     public String toString() {
-        return "Cancion [id=" + id + ", nombre=" + nombre + ", artista=" + artista + ", album=" + album + ", genero="
+        return "Cancion [id=" + id + ", titulo=" + titulo + ", artista=" + artista + ", album=" + album + ", genero="
                 + genero + ", idioma=" + idioma + ", fechaCreacion=" + fechaCreacion + ", fechaActualizacion="
                 + fechaActualizacion + "]";
     }

@@ -1,39 +1,26 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="ISO-8859-1">
-        <title>Canciones</title>
+        <title>Detalle de las canciones</title>
         <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
-        <div class="nav">
-			<h3>¡Bienvenido/a ${usuario.nombre} ${usuario.apellido}!</h3>
-            <a href="/form/add">Crear Videojuego</a>
-			<a href="/logout">Salir</a>
+        <div id="detalle">
+            <div>
+                <h1>Título: ${cancion.titulo}</h1>
+                    <ul>
+                        <li>Artista: &#160;&#160;<b>${cancion.artista}</b></li>
+                        <li>Álbum: &#160;&#160;<b>${cancion.album}</b></li>
+                        <li>Género: &#160;&#160;<b>${cancion.genero}</b></li>
+                        <li>Idioma: &#160;&#160;<b>${cancion.idioma}</b></li>
+                        <li>Fecha de creación: &#160;&#160;<b>${cancion.fechaCreacion}</b></li>
+                        <li>Última actualización: &#160;&#160;<b>${cancion.fechaActualizacion}</b></li>
+                    </ul>
+            </div>
+            <a href="/canciones">Volver</a>
         </div>
-        <div class="content">
-	        <div class="vPlataforma">
-	            <h1>Mis Videojuegos</h1>
-	            <ul class="videojuegos">
-	            </ul>
-	        </div>
-	        <div class="vComunidad">
-	            <h1>Videojuegos de la Comunidad</h1>
-	            <ul class="videojuegos">
-		            <c:forEach var="juego" items="${videojuegos}">
-			            <li>
-			                <img src="${juego.portada}"/>
-			                <h3>${juego.nombre}</h3>
-			                <a href="/detail/${juego.id}">Detalles</a>
-				            <a class="precio" href="/buy/${juego.id}">$${juego.precio}</a>
-			            </li>
-		            </c:forEach>
-	            </ul>
-	        </div>
-        </div>
-        <script src="/js/script.js"></script>
     </body>
 </html>
