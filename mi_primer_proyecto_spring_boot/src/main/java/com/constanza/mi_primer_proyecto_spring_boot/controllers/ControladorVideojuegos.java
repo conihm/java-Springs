@@ -4,8 +4,10 @@ package com.constanza.mi_primer_proyecto_spring_boot.controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import jakarta.validation.Valid;
 @Controller
 public class ControladorVideojuegos implements ManejoDeFechas {
 
+    @Autowired
     private ServicioVideojuegos servicioVideojuegos;
 
    //private ArrayList<Videojuego> videojuegos;
@@ -67,23 +70,26 @@ public class ControladorVideojuegos implements ManejoDeFechas {
     }*/
 
     @GetMapping("/form/add")
-    public String formAgregar(HttpSession session) {
+    public String formAgregar(HttpSession session, Model modelo) {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         if (usuario == null) {
             return "redirect:/";
         }
+        modelo.addAttribute("videojuego", new Videojuego());
         return "agregar.jsp";
     }
 
     @PostMapping("/add")
     public String guardar(  @Valid @ModelAttribute("videojuego") Videojuego videojuego, 
-                            @BindingResult validaciones,
+                            BindingResult validaciones,
                             HttpSession session) {
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         if (usuario == null) {
             return "redirect:/";
         }
+        if(validaciones.hasErrors())
+            return "agregar.jsp";
         servicioVideojuegos.crearVideojuego(videojuego);
         return "redirect:/getAll";
     }
