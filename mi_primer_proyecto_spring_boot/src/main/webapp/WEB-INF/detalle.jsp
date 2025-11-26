@@ -1,24 +1,28 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset ="ISO-8859-1">
+        <meta charset="ISO-8859-1">
         <title>Detalle del Videojuego</title>
-        <link rel = "stylesheet" href = "/css/styles.css">
-
+        <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
-        <h1>${juego.nombre}</h1>
-         <img src="${juego.portada}" width = "200px"/>,
-        <ul>
-            <li>Fecha lanzamiento: <b>${juego.fechaLanzamiento}</b>,</li>
-            <li>Rating: ${juego.rating}</li>
-        </ul>
-        <p>${juego.descripcion}</p>
+        <div id="detalle">
+            <div>
+                <img src="${videojuego.portada}"/>
+                <div>
+                    <h1>${videojuego.nombre}</h1>
+                    <ul>
+                        <li>Rating: &#160;&#160;<b>${videojuego.rating}</b> <span>&#9733;</span></li>
+                        <li>Fecha Lanzamiento: &#160;&#160;<b>${videojuego.fechaLanzamiento}</b></li>
+                        <li><p>${videojuego.descripcion}</p></li>
+                    </ul>
+                </div>
+            </div>
             <a href="/getAll">Volver</a>
-            </li>
+        </div>
     </body>
-
 </html>
