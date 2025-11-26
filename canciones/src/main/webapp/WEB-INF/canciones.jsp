@@ -9,8 +9,8 @@
         <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
-        <div class="content">
-	       <div class="vComunidad">
+        <div>
+	       <div>
 	            <h1>Canciones</h1>
 	            <ul class="videojuegos">
 		            <c:forEach var="cancion" items="${canciones}">
