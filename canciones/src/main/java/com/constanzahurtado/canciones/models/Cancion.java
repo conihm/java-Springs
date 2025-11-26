@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 import jakarta.persistence.Id;
 
 
@@ -23,18 +24,23 @@ public class Cancion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min = 5)
     @Column(nullable = false)
     private String titulo;
 
-    @Column(nullable = false)
+     @Size(min = 3)
+     @Column(nullable = false)
     private String artista;
 
+    @Size(min = 3)
     @Column(nullable = false)
     private String album;
 
+    @Size(min = 3)
     @Column(nullable = false)
     private String genero;
 
+    @Size(min = 3)
     @Column(nullable = false)
     private String idioma;
 
