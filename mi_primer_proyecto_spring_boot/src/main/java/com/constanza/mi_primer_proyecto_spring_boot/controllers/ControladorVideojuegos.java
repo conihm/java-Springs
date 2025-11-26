@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import com.constanza.mi_primer_proyecto_spring_boot.models.Videojuego;
 import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioVideojuegos;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class ControladorVideojuegos implements ManejoDeFechas {
@@ -74,7 +76,18 @@ public class ControladorVideojuegos implements ManejoDeFechas {
     }
 
     @PostMapping("/add")
-    public String guardar(@RequestParam String nombre,
+    public String guardar(  @Valid @ModelAttribute("videojuego") Videojuego videojuego, 
+                            @BindingResult validaciones,
+                            HttpSession session) {
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return "redirect:/";
+        }
+        servicioVideojuegos.crearVideojuego(videojuego);
+        return "redirect:/getAll";
+    }
+    /*public String guardar(@RequestParam String nombre,
             @RequestParam String descripcion,
             @RequestParam String portada,
             @RequestParam String fecha_lanzamiento,
@@ -94,7 +107,7 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         servicioVideojuegos.crearVideojuego(newJuego);
         return "redirect:/getAll";
     }
-    /*public String guardar(@RequestParam String nombre,
+    public String guardar(@RequestParam String nombre,
             @RequestParam String descripcion,
             @RequestParam String portada,
             @RequestParam String fecha_lanzamiento,
