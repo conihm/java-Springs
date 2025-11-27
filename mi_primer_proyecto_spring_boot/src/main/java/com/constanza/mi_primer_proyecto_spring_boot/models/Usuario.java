@@ -1,9 +1,13 @@
 package com.constanza.mi_primer_proyecto_spring_boot.models;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -48,10 +52,8 @@ public class Usuario {
     @ManyToMany
     @JoinTable( name = "usuarios_videojuegos",
                 joinColumns = @JoinColumn(name = "id_usuario"),
-                inverseJoinColumns = @JoinColumn(name = "id_videojuego")
-    )
-    private List<Videojuego> comprados;
-
+                inverseJoinColumns = @JoinColumn(name = "id_videojuego"))
+    private Set<Videojuego> comprados;
     
     public Usuario() {
     }
@@ -62,6 +64,7 @@ public class Usuario {
         this.email = email;
         this.password = password;
         this.videojuego = new Videojuego();
+        this.comprados = new HashSet<Videojuego>();
         
     }
 
@@ -104,7 +107,6 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-
     
     public Videojuego getVideojuego() {
         return videojuego;
@@ -113,9 +115,6 @@ public class Usuario {
     public void setVideojuego(Videojuego videojuego) {
         this.videojuego = videojuego;
     }
-
-    
-
     
     @Override
     public String toString() {
@@ -132,14 +131,12 @@ public class Usuario {
         this.coins = coins;
     }
 
-    public List<Videojuego> getComprados() {
+    public Set<Videojuego> getComprados() {
         return comprados;
     }
 
-    public void setComprados(List<Videojuego> comprados) {
-        this.comprados = comprados;
+    public void setComprados(Set<Videojuego> juegosUsuario) {
+        this.comprados = juegosUsuario;
     }
-
-    
 
 }

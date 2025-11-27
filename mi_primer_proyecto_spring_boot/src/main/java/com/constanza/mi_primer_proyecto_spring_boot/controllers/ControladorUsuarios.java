@@ -1,18 +1,14 @@
 package com.constanza.mi_primer_proyecto_spring_boot.controllers;
 
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.constanza.mi_primer_proyecto_spring_boot.models.Usuario;
 import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioUsuarios;
-
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -49,6 +45,7 @@ public class ControladorUsuarios {
             return "redirect:/";
         }
         usuario.setPassword("");
+        usuario.setComprados(null);
         session.setAttribute("usuario", usuario);
         return "redirect:/getAll";
     }
@@ -72,6 +69,7 @@ public class ControladorUsuarios {
             usuario = servicioUsuarios.crearUsuario(newUser);
         }
         usuario.setPassword("");
+        usuario.setComprados(null);
         session.setAttribute("usuario", usuario);
         return "redirect:/getAll";
     }

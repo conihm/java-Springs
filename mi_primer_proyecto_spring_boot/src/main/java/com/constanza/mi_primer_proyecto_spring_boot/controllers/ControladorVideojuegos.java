@@ -1,7 +1,9 @@
 package com.constanza.mi_primer_proyecto_spring_boot.controllers;
 
+import java.util.HashSet;
+import java.util.List;
 
-
+import org.apache.jasper.tagplugins.jstl.core.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,18 +13,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import com.constanza.mi_primer_proyecto_spring_boot.interfaces.ManejoDeFechas;
 import com.constanza.mi_primer_proyecto_spring_boot.models.Resena;
 import com.constanza.mi_primer_proyecto_spring_boot.models.Usuario;
 import com.constanza.mi_primer_proyecto_spring_boot.models.Videojuego;
 import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioResenas;
+import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioUsuarios;
 import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioVideojuegos;
-
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PutMapping;
-
 
 
 @Controller
@@ -34,6 +34,10 @@ public class ControladorVideojuegos implements ManejoDeFechas {
     @Autowired
     private ServicioResenas servicioResenas;
 
+    @Autowired
+    private ServicioUsuarios servicioUsuarios;
+
+    
    //private ArrayList<Videojuego> videojuegos;
 
     /*public ControladorVideojuegos() {
@@ -62,9 +66,13 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         if (usuario == null) {
             return "redirect:/";
         }
+        HashSet<Videojuego> misVideoJuegos = (HashSet<Videojuego>) servicioUsuarios.obtenerUsuarioPorId(usuario.getId()).getComprados();
+        modelo.addAttribute("misVideojuegos", misVideoJuegos);
         modelo.addAttribute("videojuegos", servicioVideojuegos.obtenerTodosLosVideojuegos());
         return "videojuegos.jsp";
     }
+
+
 
     /*private Videojuego buscar(Long id) {
         Videojuego v = null;
@@ -208,5 +216,27 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         this.servicioResenas.crearResena(resena);
         return "redirect:/detail/" + resena.getVideojuego().getId();
     }
+
+    @GetMapping("/buy/{id}")
+    public String comprarVideojuego(HttpSession session, 
+                                    Model modelo,
+                                    @PathVariable("id") Long idJuego) {
+        Usuario usuarioSession = (Usuario) session.getAttribute("usuario");
+        if (usuarioSession == null) {
+            return "redirect:/";
+        }
+        Usuario usuarioServicio = servicioUsuarios.obtenerUsuarioPorId(usuarioSession.getId());
+        Videojuego juegoComprar = servicioVideojuegos.obtenerPorId(idJuego);
+        HashSet<Videojuego> juegosUsuario = (HashSet<Videojuego>) usuarioServicio.getComprados();
+        juegosUsuario.add(juegoComprar);
+        usuarioServicio.setComprados(juegosUsuario);
+        Double difCoins = usuarioServicio.getCoins() - juegoComprar.getPrecio();
+        usuarioServicio.setCoins(difCoins);
+        usuarioSession.setCoins(difCoins);
+        servicioUsuarios.actualizarUsuario(usuarioServicio);
+        session.setAttribute("usuario", usuarioSession);
+        return "redirect:/getAll";  
+    }
+
 
 }

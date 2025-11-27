@@ -2,12 +2,13 @@ package com.constanza.mi_primer_proyecto_spring_boot.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
-
 import org.hibernate.validator.constraints.URL;
-
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -60,27 +61,15 @@ public class Videojuego {
     @OneToMany(mappedBy = "videojuego")
     private List<Resena> resenas;
 
-    @ManyToMany
-    @JoinTable( name = "usuarios_videojuegos",
-                joinColumns = @JoinColumn(name = "id_videojuego"),
-                inverseJoinColumns = @JoinColumn(name = "id_usuario")
-    )
+    @ManyToMany(mappedBy = "comprados", fetch = FetchType.LAZY)
     @Transient
-    private List<Usuario> compradores;
+    private Set<Usuario> compradores;
 
     public Videojuego() {
 
     }
   
-    
-   /*  @Override
-    public String toString() {
-        return "Videojuego [nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
-                + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", generos=" + generos
-                + ", plataformas=" + plataformas + "]";
-    }*/
 
-    
 
     public Videojuego(Long id, String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating,
             ArrayList<String> generos, ArrayList<String> plataformas) {
@@ -103,6 +92,7 @@ public class Videojuego {
         this.precio = (precio != 0) ? precio : this.generarPrecioRandom();
         this.creador = creador;
         this.resenas = new ArrayList<>();
+        this.compradores = new HashSet<Usuario>();
 
     }
 
@@ -178,18 +168,12 @@ public class Videojuego {
         this.resenas = resenas;
     }
 
-
-
-
-    
-
     @Override
     public String toString() {
         return "Videojuego [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
                 + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", precio=" + precio + ", creador="
                 + creador + ", resenas=" + resenas + ", compradores=" + compradores + "]";
     }
-
 
     private double generarPrecioRandom() {
         return Math.round((ThreadLocalRandom.current().nextDouble(5.0, 150.0)) * 100.00 )/ 100.00;
@@ -201,13 +185,11 @@ public class Videojuego {
             precio = generarPrecioRandom();
     }
 
-
-    public List<Usuario> getCompradores() {
+    public Set<Usuario> getCompradores() {
         return compradores;
     }
 
-
-    public void setCompradores(List<Usuario> compradores) {
+    public void setCompradores(Set<Usuario> compradores) {
         this.compradores = compradores;
     }
 

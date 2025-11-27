@@ -160,3 +160,25 @@ textarea {
 .paginador a {
   padding: 8px;
 }
+
+.precio {
+  background-color: #151515;
+  color: lightgreen;
+  border: 1px solid lightgreen;
+  font-weight: bold;
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.comprar {
+  margin-left: 5px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#coins {
+  background-color: #151515;
+  color: lightgreen;
+  border: 1px solid lightgreen;
+}
