@@ -5,7 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 
@@ -31,7 +34,12 @@ public class Usuario {
     private String password;
     
     @Column(nullable = false, columnDefinition = "DOUBLE DEFAULT 200.00")
-    private Double coins;
+    private Double coins = 200.0;
+
+    @OneToOne
+    @JoinColumn(name = "id_videojuego")
+    @Transient
+    private Videojuego videojuego;
 
     
     public Usuario() {
@@ -42,7 +50,8 @@ public class Usuario {
         this.apellido = apellido;
         this.email = email;
         this.password = password;
-        this.coins = 200.00;
+        this.videojuego = new Videojuego();
+        
     }
 
     public Long getId() {
@@ -86,13 +95,21 @@ public class Usuario {
     }
 
     
+    public Videojuego getVideojuego() {
+        return videojuego;
+    }
+
+    public void setVideojuego(Videojuego videojuego) {
+        this.videojuego = videojuego;
+    }
 
     
+
 
     @Override
     public String toString() {
         return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
-                + ", password=" + password + ", coins=" + coins + "]";
+                + ", password=" + password + ", coins=" + coins + ", videojuego=" + videojuego + "]";
     }
 
     public Double getCoins() {
@@ -102,4 +119,5 @@ public class Usuario {
     public void setCoins(Double coins) {
         this.coins = coins;
     }
+
 }

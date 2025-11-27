@@ -1,8 +1,6 @@
 package com.constanza.mi_primer_proyecto_spring_boot.controllers;
 
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,17 +11,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.constanza.mi_primer_proyecto_spring_boot.interfaces.ManejoDeFechas;
+import com.constanza.mi_primer_proyecto_spring_boot.models.Resena;
 import com.constanza.mi_primer_proyecto_spring_boot.models.Usuario;
 import com.constanza.mi_primer_proyecto_spring_boot.models.Videojuego;
+import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioResenas;
 import com.constanza.mi_primer_proyecto_spring_boot.services.ServicioVideojuegos;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -31,6 +30,9 @@ public class ControladorVideojuegos implements ManejoDeFechas {
 
     @Autowired
     private ServicioVideojuegos servicioVideojuegos;
+    
+    @Autowired
+    private ServicioResenas servicioResenas;
 
    //private ArrayList<Videojuego> videojuegos;
 
@@ -147,6 +149,7 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         }
         Videojuego juego = servicioVideojuegos.obtenerPorId(id);
         modelo.addAttribute("videojuego", juego);
+        modelo.addAttribute("resena", new Resena());
         return "detalle.jsp";
     }
 
@@ -187,6 +190,23 @@ public class ControladorVideojuegos implements ManejoDeFechas {
 
     }
 
-    
+
+    @PostMapping("/comment")
+    public String comentar(@Valid @ModelAttribute("resena") Resena resena,
+                                        BindingResult validaciones,
+                                        HttpSession session,
+                                        Model modelo) {
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+            return "redirect:/";
+        }
+        if(validaciones.hasErrors()) {
+            Videojuego juego = this.servicioVideojuegos.obtenerPorId(resena.getVideojuego().getId());
+            modelo.addAttribute("videojuego", juego);
+            return "detalle.jsp";
+        }
+        this.servicioResenas.crearResena(resena);
+        return "redirect:/detail/" + resena.getVideojuego().getId();
+    }
 
 }

@@ -41,6 +41,8 @@
 
             <input type="hidden" name="id" value="${videojuego.id}"/>
             <input type="hidden" name="precio" value="${videojuego.precio}"/>
+            <input type="hidden" name="creador" value="${usuario.id}"/>
+
 
 
             <input type="submit" value="Editar"/>

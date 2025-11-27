@@ -34,6 +34,9 @@
             <form:input type="number" path="rating" step="0.5" />
             <form:errors path="rating" />
 
+		    <input type="hidden" name="creador" value="${usuario.id}"/>
+
+
             <input type="submit" value="Crear"/>
         </form:form>
         <a href="/getAll">Volver</a>

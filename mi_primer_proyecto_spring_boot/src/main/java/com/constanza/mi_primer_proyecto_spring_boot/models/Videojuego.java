@@ -2,6 +2,7 @@ package com.constanza.mi_primer_proyecto_spring_boot.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.hibernate.validator.constraints.URL;
@@ -10,6 +11,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
@@ -43,10 +47,16 @@ public class Videojuego {
     private Double rating;
     
     private Double precio;
+
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
+    private Usuario creador;
     
     //private ArrayList<String> generos, plataformas;
     
-    
+    @OneToMany(mappedBy = "videojuego")
+    private List<Resena> resenas;
+
     public Videojuego() {
 
     }
@@ -73,14 +83,16 @@ public class Videojuego {
         this.id = id;
     }
 
-    public Videojuego(String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating, Double precio) {
+    public Videojuego(String nombre, String descripcion, String portada, LocalDate fechaLanzamiento, Double rating, Double precio, Usuario creador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.portada = portada;
         this.fechaLanzamiento = fechaLanzamiento;
         this.rating = rating;
-        this.id = id;
         this.precio = (precio != 0) ? precio : this.generarPrecioRandom();
+        this.creador = creador;
+        this.resenas = new ArrayList<>();
+
     }
 
     public String getNombre() {
@@ -143,12 +155,39 @@ public class Videojuego {
         this.precio = precio;
     }
 
+    
+
+    public Usuario getCreador() {
+        return creador;
+    }
+
+
+    public void setCreador(Usuario creador) {
+        this.creador = creador;
+    }
+
+
+    public List<Resena> getResenas() {
+        return resenas;
+    }
+
+
+    public void setResenas(List<Resena> resenas) {
+        this.resenas = resenas;
+    }
+
+
+
+
+
 
     @Override
     public String toString() {
         return "Videojuego [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
-                + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", precio=" + precio + "]";
+                + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", precio=" + precio + ", creador="
+                + creador + "]";
     }
+
 
     private double generarPrecioRandom() {
         return Math.round((ThreadLocalRandom.current().nextDouble(5.0, 150.0)) * 100.00 )/ 100.00;
@@ -160,7 +199,7 @@ public class Videojuego {
             precio = generarPrecioRandom();
     }
 
-    
+
     /*
 
     public ArrayList<String> getGeneros() {
