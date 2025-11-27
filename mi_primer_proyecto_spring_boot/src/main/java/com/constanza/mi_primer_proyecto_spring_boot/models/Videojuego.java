@@ -12,10 +12,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -56,6 +59,14 @@ public class Videojuego {
     
     @OneToMany(mappedBy = "videojuego")
     private List<Resena> resenas;
+
+    @ManyToMany
+    @JoinTable( name = "usuarios_videojuegos",
+                joinColumns = @JoinColumn(name = "id_videojuego"),
+                inverseJoinColumns = @JoinColumn(name = "id_usuario")
+    )
+    @Transient
+    private List<Usuario> compradores;
 
     public Videojuego() {
 
@@ -135,42 +146,33 @@ public class Videojuego {
         this.rating = rating;
     }
 
-
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
     }
 
-
     public Double getPrecio() {
         return precio;
     }
-
 
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
-    
-
     public Usuario getCreador() {
         return creador;
     }
-
 
     public void setCreador(Usuario creador) {
         this.creador = creador;
     }
 
-
     public List<Resena> getResenas() {
         return resenas;
     }
-
 
     public void setResenas(List<Resena> resenas) {
         this.resenas = resenas;
@@ -179,13 +181,13 @@ public class Videojuego {
 
 
 
-
+    
 
     @Override
     public String toString() {
         return "Videojuego [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", portada=" + portada
                 + ", fechaLanzamiento=" + fechaLanzamiento + ", rating=" + rating + ", precio=" + precio + ", creador="
-                + creador + "]";
+                + creador + ", resenas=" + resenas + ", compradores=" + compradores + "]";
     }
 
 
@@ -198,6 +200,18 @@ public class Videojuego {
         if(precio == null)
             precio = generarPrecioRandom();
     }
+
+
+    public List<Usuario> getCompradores() {
+        return compradores;
+    }
+
+
+    public void setCompradores(List<Usuario> compradores) {
+        this.compradores = compradores;
+    }
+
+    
 
 
     /*

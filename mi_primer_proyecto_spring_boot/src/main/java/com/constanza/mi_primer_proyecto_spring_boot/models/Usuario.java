@@ -1,11 +1,15 @@
 package com.constanza.mi_primer_proyecto_spring_boot.models;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
@@ -40,6 +44,13 @@ public class Usuario {
     @JoinColumn(name = "id_videojuego")
     @Transient
     private Videojuego videojuego;
+
+    @ManyToMany
+    @JoinTable( name = "usuarios_videojuegos",
+                joinColumns = @JoinColumn(name = "id_usuario"),
+                inverseJoinColumns = @JoinColumn(name = "id_videojuego")
+    )
+    private List<Videojuego> comprados;
 
     
     public Usuario() {
@@ -105,11 +116,12 @@ public class Usuario {
 
     
 
-
+    
     @Override
     public String toString() {
         return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
-                + ", password=" + password + ", coins=" + coins + ", videojuego=" + videojuego + "]";
+                + ", password=" + password + ", coins=" + coins + ", videojuego=" + videojuego + ", comprados="
+                + comprados + "]";
     }
 
     public Double getCoins() {
@@ -119,5 +131,15 @@ public class Usuario {
     public void setCoins(Double coins) {
         this.coins = coins;
     }
+
+    public List<Videojuego> getComprados() {
+        return comprados;
+    }
+
+    public void setComprados(List<Videojuego> comprados) {
+        this.comprados = comprados;
+    }
+
+    
 
 }
