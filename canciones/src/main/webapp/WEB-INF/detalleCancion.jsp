@@ -23,9 +23,13 @@
             <p>
                 <a href="/canciones">Volver</a>
             </p>
-              <p>
+            <p>
                 <a href="/canciones/formulario/editar/${cancion.id}">Editar</a>
             </p>
+            <form action="/canciones/eliminar/${cancion.id}" method="POST">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button>Eliminar</button>
+			</form>
         </div>
     </body>
 </html>

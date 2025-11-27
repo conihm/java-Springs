@@ -9,6 +9,8 @@ import com.constanzahurtado.canciones.services.ServicioCanciones;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,5 +69,12 @@ public class ControladorCanciones {
         this.servicioCanciones.actualizarCancion(cancion);
         return "redirect:/canciones";
     }
+
+    @DeleteMapping("/canciones/eliminar/{id}")
+    public String procesarEliminarCancion(@PathVariable("id") Long id) {
+        this.servicioCanciones.eliminarCancion(id);
+        return "redirect:/canciones";
+    }
+
     
 }
