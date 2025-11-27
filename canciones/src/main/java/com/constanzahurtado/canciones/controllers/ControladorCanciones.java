@@ -62,9 +62,8 @@ public class ControladorCanciones {
     @PutMapping("/canciones/procesa/editar")
     public String procesarEditarCancion(@Valid @ModelAttribute("cancion") Cancion cancion,
                                         BindingResult validaciones) {
-        if (validaciones.hasErrors()) {
+        if (validaciones.hasErrors())
             return "editarCancion.jsp";
-        }
         this.servicioCanciones.actualizarCancion(cancion);
         return "redirect:/canciones";
     }

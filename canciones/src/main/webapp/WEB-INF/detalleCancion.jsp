@@ -24,7 +24,7 @@
                 <a href="/canciones">Volver</a>
             </p>
               <p>
-                <a href="/canciones/formulario/editar/{id}">Editar</a>
+                <a href="/canciones/formulario/editar/${cancion.id}">Editar</a>
             </p>
         </div>
     </body>
