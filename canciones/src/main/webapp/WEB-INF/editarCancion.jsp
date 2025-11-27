@@ -10,9 +10,8 @@
     </head>
     <body>
         <h1>Editar Cancion:</h1>
-        <form:form action="/canciones/procesa/editar" method="POST" modelAttribute="cancion">
+            <form:form action="/canciones/procesa/editar" method="POST" modelAttribute="cancion">            
             <input type="hidden" name="_method" value="PUT"/>
-
             <p>
                 <form:label path="titulo">Título:</form:label>
                 <form:input type="text" path="titulo"/>
@@ -37,29 +36,15 @@
                 <form:label path="idioma">Idioma:</form:label>
                 <form:input type="text" path="idioma"/>
                 <form:errors path="idioma"/>
-            </p>
+            </p>        
+            <p>
                 <input type="hidden" name="id" value="${cancion.id}"/>
                 <input type="hidden" name="fechaCreacion" value="${cancion.fechaCreacion}"/>
-                <input type="hidden" name="fechaActualizacion" value="${cancion.fechaActualizacion}"/>
-            <p>
-                
+                <input type="hidden" name="fechaActualizacion" value="${cancion.fechaActualizacion}"/>    
             </p>
-            
-
-            
+                
             <input type="submit" value="Editar"/>
         </form:form> 
         <a href="/canciones">Volver</a>
-    </body>
-</html>
-
-
-
-    <body>
-
-
-            
-        </form:form> 
-        <a href="/getAll">Volver</a>
     </body>
 </html>
