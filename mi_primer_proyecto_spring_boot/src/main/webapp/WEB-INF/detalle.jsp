@@ -27,15 +27,15 @@
                 </div>
             </div>
             <div>
-                <c:if test="${fn:length(videojuegos.resenas) > 0}">
+                <c:if test="${fn:length(videojuego.resenas) > 0}">
                     <h4>Reseñas</h4>
-                        <c:forEach var="resena" items="${videojuegos.resenas}">
+                        <c:forEach var="resena" items="${videojuego.resenas}">
                             <li>${resena.mensaje}</li>
 		            </c:forEach>
 				</c:if>	
             </div>
                 <form:form action="/comment" method="POST" modelAttribute="resena">
-                    <form:label path="mensaje">Escribe tu reseña </form:label>
+                    <form:label path="mensaje">Escribe tu reseña: </form:label>
                     <form:textarea path="mensaje"></form:textarea>
                     <form:errors path="mensaje"/>
                     <input type= "hidden" name="videojuego" value="${videojuego.id}" />
