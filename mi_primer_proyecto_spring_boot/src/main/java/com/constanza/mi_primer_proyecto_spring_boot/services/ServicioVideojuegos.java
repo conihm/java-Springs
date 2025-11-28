@@ -1,10 +1,7 @@
 package com.constanza.mi_primer_proyecto_spring_boot.services;
-
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.constanza.mi_primer_proyecto_spring_boot.models.Videojuego;
 import com.constanza.mi_primer_proyecto_spring_boot.repositories.RepositorioVideojuegos;
 
@@ -14,7 +11,7 @@ public class ServicioVideojuegos {
     @Autowired
     private RepositorioVideojuegos repositorioVideojuegos;
 
-    public List<Videojuego> obtenerTodosLosVideojuegos(){
+     public List<Videojuego> obtenerTodosLosVideojuegos() {
         return (List<Videojuego>) this.repositorioVideojuegos.findAll();
     }
 

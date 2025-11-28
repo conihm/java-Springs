@@ -1,9 +1,6 @@
 package com.constanza.mi_primer_proyecto_spring_boot.controllers;
 
-import java.util.HashSet;
 import java.util.List;
-
-import org.apache.jasper.tagplugins.jstl.core.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -66,7 +63,7 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         if (usuario == null) {
             return "redirect:/";
         }
-        HashSet<Videojuego> misVideoJuegos = (HashSet<Videojuego>) servicioUsuarios.obtenerUsuarioPorId(usuario.getId()).getComprados();
+        List<Videojuego> misVideoJuegos = (List<Videojuego>) servicioUsuarios.obtenerUsuarioPorId(usuario.getId()).getComprados();
         modelo.addAttribute("misVideojuegos", misVideoJuegos);
         modelo.addAttribute("videojuegos", servicioVideojuegos.obtenerTodosLosVideojuegos());
         return "videojuegos.jsp";
@@ -227,7 +224,7 @@ public class ControladorVideojuegos implements ManejoDeFechas {
         }
         Usuario usuarioServicio = servicioUsuarios.obtenerUsuarioPorId(usuarioSession.getId());
         Videojuego juegoComprar = servicioVideojuegos.obtenerPorId(idJuego);
-        HashSet<Videojuego> juegosUsuario = (HashSet<Videojuego>) usuarioServicio.getComprados();
+        List<Videojuego> juegosUsuario = (List<Videojuego>) usuarioServicio.getComprados();
         juegosUsuario.add(juegoComprar);
         usuarioServicio.setComprados(juegosUsuario);
         Double difCoins = usuarioServicio.getCoins() - juegoComprar.getPrecio();

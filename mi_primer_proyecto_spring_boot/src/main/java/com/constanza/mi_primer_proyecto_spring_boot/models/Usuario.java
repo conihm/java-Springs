@@ -1,13 +1,9 @@
 package com.constanza.mi_primer_proyecto_spring_boot.models;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,8 +13,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-
-
 
 @Entity
 @Table(name = "usuarios")
@@ -53,7 +47,7 @@ public class Usuario {
     @JoinTable( name = "usuarios_videojuegos",
                 joinColumns = @JoinColumn(name = "id_usuario"),
                 inverseJoinColumns = @JoinColumn(name = "id_videojuego"))
-    private Set<Videojuego> comprados;
+    private List<Videojuego> comprados;
     
     public Usuario() {
     }
@@ -64,7 +58,7 @@ public class Usuario {
         this.email = email;
         this.password = password;
         this.videojuego = new Videojuego();
-        this.comprados = new HashSet<Videojuego>();
+        this.comprados = new ArrayList<Videojuego>();
         
     }
 
@@ -131,11 +125,11 @@ public class Usuario {
         this.coins = coins;
     }
 
-    public Set<Videojuego> getComprados() {
+    public List<Videojuego> getComprados() {
         return comprados;
     }
 
-    public void setComprados(Set<Videojuego> juegosUsuario) {
+    public void setComprados(List<Videojuego> juegosUsuario) {
         this.comprados = juegosUsuario;
     }
 

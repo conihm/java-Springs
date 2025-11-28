@@ -2,9 +2,7 @@ package com.constanza.mi_primer_proyecto_spring_boot.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import org.hibernate.validator.constraints.URL;
 import jakarta.persistence.Entity;
@@ -13,7 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -63,7 +60,7 @@ public class Videojuego {
 
     @ManyToMany(mappedBy = "comprados", fetch = FetchType.LAZY)
     @Transient
-    private Set<Usuario> compradores;
+    private List<Usuario> compradores;
 
     public Videojuego() {
 
@@ -92,7 +89,7 @@ public class Videojuego {
         this.precio = (precio != 0) ? precio : this.generarPrecioRandom();
         this.creador = creador;
         this.resenas = new ArrayList<>();
-        this.compradores = new HashSet<Usuario>();
+        this.compradores = new ArrayList<>();
 
     }
 
@@ -185,11 +182,11 @@ public class Videojuego {
             precio = generarPrecioRandom();
     }
 
-    public Set<Usuario> getCompradores() {
+    public List<Usuario> getCompradores() {
         return compradores;
     }
 
-    public void setCompradores(Set<Usuario> compradores) {
+    public void setCompradores(List<Usuario> compradores) {
         this.compradores = compradores;
     }
 
