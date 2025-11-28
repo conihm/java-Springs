@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
         <title>Artistas</title>
         <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
         <div>
-	       <div>
+	       	<div>
 	            <h1>Artistas</h1>
 	            <ul class="artistas">
 		            <c:forEach var="artista" items="${artistas}">

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="ISO-8859-1">
+		<meta charset="UTF-8">
         <title>Canciones</title>
         <link rel="stylesheet" href="/css/styles.css">
     </head>
@@ -23,6 +23,9 @@
 	        </div>
 			<div>
 				<a href="/canciones/formulario/agregar">Agregar nueva canción</a>
+			</div>
+			<div>
+				<a href="/artistas">Ir a artistas</a>
 			</div>
         </div>
         <script src="/js/script.js"></script>

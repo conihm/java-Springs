@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="ISO-8859-1">
+	    <meta charset="UTF-8">
         <title>Editar Cancion</title>
         <link rel="stylesheet" href="/css/styles.css">
     </head>
