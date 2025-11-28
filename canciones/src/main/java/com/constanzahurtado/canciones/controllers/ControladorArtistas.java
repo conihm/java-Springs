@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import com.constanzahurtado.canciones.models.Artista;
-import com.constanzahurtado.canciones.models.Cancion;
 import com.constanzahurtado.canciones.services.ServicioArtistas;
 
 import jakarta.validation.Valid;

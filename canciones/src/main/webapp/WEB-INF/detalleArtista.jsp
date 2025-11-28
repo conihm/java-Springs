@@ -12,20 +12,27 @@
         <div id="detalle">
             <div>
                 <h1>Artista: ${artista.nombre} ${artista.apellido}</h1>
-                <li>Biografía: &#160;&#160;<b>${artista.biografia}</b></li>
+                <p>Biografía: &#160;&#160;<b>${artista.biografia}</b></p> 
                 <div>
                     <h3>Canciones compuestas</h3>
+                    
                     <ul class="canciones">
                         <c:if test="${empty artista.canciones}">
-                            <p><i>Este artista aún no tiene canciones registradas.</i></p>
+                            <li style="list-style: none;">
+                                <i>Este artista aún no tiene canciones registradas.</i>
+                            </li>
                         </c:if>
+                        
                         <c:forEach var="cancion" items="${artista.canciones}">
+                            <li>
                                 <strong>Título: ${cancion.titulo}</strong>
                                 <ul>
                                     <li>Álbum: <b>${cancion.album}</b></li>
                                     <li>Género: <b>${cancion.genero}</b></li>
                                     <li>Idioma: <b>${cancion.idioma}</b></li>
                                 </ul>
+                                <br> 
+                            </li>
                         </c:forEach>
                     </ul>
                 </div>

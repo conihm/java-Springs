@@ -31,6 +31,5 @@
             
             <button type="submit">Agregar Artista</button>
         </form:form> 
-        <a href="/canciones">Volver</a>
-    </body>
+        <a href="/artistas">Volver a lista de artistas</a>    </body>
 </html>

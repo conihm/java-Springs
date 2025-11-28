@@ -57,9 +57,9 @@ public class Cancion {
 
     }
 
-    public Cancion(String titulo, String album, String genero, String idioma) {
+    public Cancion(String titulo, String album, String genero, String idioma, Artista artista) {
         this.titulo = titulo;
-        this.artista = new Artista();
+        this.artista = artista;
         this.album = album;
         this.genero = genero;
         this.idioma = idioma;
