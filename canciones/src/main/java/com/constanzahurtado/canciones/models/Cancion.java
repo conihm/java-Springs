@@ -1,11 +1,11 @@
 package com.constanzahurtado.canciones.models;
 
 import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.PrePersist;
@@ -13,6 +13,8 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 
 @Entity
@@ -27,9 +29,9 @@ public class Cancion {
     @Column(nullable = false)
     private String titulo;
 
-     @Size(min = 3, message = "El artista debe tener al menos 3 caracteres")
-     @Column(nullable = false)
-    private String artista;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_artista")
+    private Artista artista;
 
     @Size(min = 3, message = "El álbum debe tener al menos 3 caracteres")
     @Column(nullable = false)
@@ -55,9 +57,9 @@ public class Cancion {
 
     }
 
-    public Cancion(String titulo, String artista, String album, String genero, String idioma) {
+    public Cancion(String titulo, String album, String genero, String idioma) {
         this.titulo = titulo;
-        this.artista = artista;
+        this.artista = new Artista();
         this.album = album;
         this.genero = genero;
         this.idioma = idioma;
@@ -89,11 +91,11 @@ public class Cancion {
         this.titulo = titulo;
     }
 
-    public String getArtista() {
+    public Artista getArtista() {
         return artista;
     }
 
-    public void setArtista(String artista) {
+    public void setArtista(Artista artista) {
         this.artista = artista;
     }
 
@@ -139,11 +141,9 @@ public class Cancion {
 
     @Override
     public String toString() {
-        return "Cancion [id=" + id + ", titulo=" + titulo + ", artista=" + artista + ", album=" + album + ", genero="
-                + genero + ", idioma=" + idioma + ", fechaCreacion=" + fechaCreacion + ", fechaActualizacion="
+        return "Cancion [id=" + id + ", titulo=" + titulo + ", artista=" + (artista != null ? artista.getNombre() : "N/A") +
+                album + ", genero=" + genero + ", idioma=" + idioma + ", fechaCreacion=" + fechaCreacion + ", fechaActualizacion="
                 + fechaActualizacion + "]";
     }
-
-
 
 }
