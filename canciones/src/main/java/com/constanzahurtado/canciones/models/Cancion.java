@@ -25,7 +25,7 @@ public class Cancion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 5, message = "El título debe tener al menos 5 caracteres")
+    @Size(min = 3, message = "El título debe tener al menos 3 caracteres")
     @Column(nullable = false)
     private String titulo;
 

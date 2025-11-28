@@ -30,7 +30,6 @@ public class Artista {
     @NotBlank(message = "Este campo es obligatorio")
     private String nombre;
 
-    @NotBlank(message = "Este campo es obligatorio")
     private String apellido;
 
     @NotBlank(message = "Este campo es obligatorio")

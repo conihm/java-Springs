@@ -27,8 +27,7 @@
                 <form:textarea path="biografia"></form:textarea>
                 <form:errors path="biografia" style="color:red"/>
             </p>
-    
-            
+        
             <button type="submit">Agregar Artista</button>
         </form:form> 
         <a href="/artistas">Volver a lista de artistas</a>    </body>

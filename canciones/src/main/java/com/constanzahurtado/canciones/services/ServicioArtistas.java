@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.constanzahurtado.canciones.models.Artista;
-import com.constanzahurtado.canciones.models.Cancion;
 import com.constanzahurtado.canciones.repositories.RepositorioArtistas;
 
 @Service

@@ -18,11 +18,6 @@
                 <form:errors path="titulo"/>
             </p>
             <p>
-                <form:label path="artista">Artista:</form:label>
-                <form:input type="text" path="artista"/>
-                <form:errors path="artista"/>
-            </p>
-            <p>
                 <form:label path="album">Álbum:</form:label>
                 <form:input type="text" path="album"/>
                 <form:errors path="album"/>
@@ -40,7 +35,8 @@
             <p>
                 <input type="hidden" name="id" value="${cancion.id}"/>
                 <input type="hidden" name="fechaCreacion" value="${cancion.fechaCreacion}"/>
-                <input type="hidden" name="fechaActualizacion" value="${cancion.fechaActualizacion}"/>    
+                <input type="hidden" name="fechaActualizacion" value="${cancion.fechaActualizacion}"/>  
+                <input type="hidden" name="artista.id" value="${cancion.artista.id}"/>  
             </p>
                 
             <input type="submit" value="Editar"/>

@@ -12,8 +12,7 @@
             <div>
                 <h1>Título: ${cancion.titulo}</h1>
                     <ul>
-                        <li>Artista: &#160;&#160;<b>${cancion.artista}</b></li>
-                        <li>Álbum: &#160;&#160;<b>${cancion.album}</b></li>
+                        <li>Artista: &#160;&#160;<b>${cancion.artista.nombre} ${cancion.artista.apellido}</b></li>                        <li>Álbum: &#160;&#160;<b>${cancion.album}</b></li>
                         <li>Género: &#160;&#160;<b>${cancion.genero}</b></li>
                         <li>Idioma: &#160;&#160;<b>${cancion.idioma}</b></li>
                         <li>Fecha de creación: &#160;&#160;<b>${cancion.fechaCreacion}</b></li>

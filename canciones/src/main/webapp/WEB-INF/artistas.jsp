@@ -21,6 +21,9 @@
 	            </ul>
 	        </div>
 			<div>
+				<a href="/artistas/formulario/agregar">Agregar nuevo artista</a>
+			</div>
+			<div>
 				<a href="/canciones">Ir a canciones</a>
 			</div>
         </div>
