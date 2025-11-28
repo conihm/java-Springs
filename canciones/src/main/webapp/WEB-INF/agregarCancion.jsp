@@ -21,6 +21,16 @@
                 <form:input type="text" path="artista"/>
                 <form:errors path="artista"/>
             </p>
+
+            <p>
+                <label>Artista:</label>
+                <select name="idArtista">
+                    <c:forEach var="artista" items="${artistas}" >
+                        <option value="${artista.id}">${artista.nombre} ${artista.apellido}</option>
+                    </c:forEach>
+                </select>
+            </p>
+
             <p>
                 <form:label path="album">Álbum:</form:label>
                 <form:input type="text" path="album"/>
@@ -37,7 +47,7 @@
                 <form:errors path="idioma"/>
             </p>
             
-            <input type="submit" value="Crear"/>
+            <button type="submit">Agregar Canción</button>
         </form:form> 
         <a href="/canciones">Volver</a>
     </body>

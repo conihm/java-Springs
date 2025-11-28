@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
+import com.constanzahurtado.canciones.models.Artista;
 import com.constanzahurtado.canciones.models.Cancion;
+import com.constanzahurtado.canciones.services.ServicioArtistas;
 import com.constanzahurtado.canciones.services.ServicioCanciones;
 
-import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +28,9 @@ public class ControladorCanciones {
     @Autowired
     private ServicioCanciones servicioCanciones;
 
+    @Autowired
+    private ServicioArtistas servicioArtistas;
+
     @GetMapping("/canciones")
     public String desplegarCanciones(Model modelo) {
         modelo.addAttribute("canciones", this.servicioCanciones.obtenerTodasLasCanciones());
@@ -41,16 +46,22 @@ public class ControladorCanciones {
     @GetMapping("/canciones/formulario/agregar")
     public String formularioAgregarCancion(Model modelo) {
         modelo.addAttribute("cancion", new Cancion());
+        modelo.addAttribute("artistas", this.servicioArtistas.obtenerTodosLosArtistas());
         return "agregarCancion.jsp";
     }
 
     @PostMapping("/canciones/procesa/agregar")
     public String procesarAgregarCancion(@Valid @ModelAttribute("cancion") Cancion cancion,
-            BindingResult validaciones) {
+            BindingResult validaciones,
+            @RequestParam Long idArtista,
+            Model modelo) {
 
         if (validaciones.hasErrors()) {
+            modelo.addAttribute("artistas", this.servicioArtistas.obtenerTodosLosArtistas());
             return "agregarCancion.jsp";
         }
+        Artista artista = this.servicioArtistas.obtenerArtistaPorId(idArtista);
+        cancion.setArtista(artista);
         this.servicioCanciones.agregarCancion(cancion);
         return "redirect:/canciones";
     }
