@@ -38,7 +38,6 @@ public class Estudiante {
     @Size(min = 3, message = "Este campo debe contener al menos 3 caracteres")
     private String apellido;
 
-    @NotBlank(message = "Este campo es obligatorio")
     @Positive(message = "Este campo debe ser mayor a 0")
     private int edad;
 

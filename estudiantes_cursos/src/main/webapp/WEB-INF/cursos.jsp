@@ -5,27 +5,27 @@
 <html>
     <head>
 		<meta charset="UTF-8">
-        <title>Estudiantes</title>
+        <title>Cursos</title>
         <link rel="stylesheet" href="/css/styles.css">
     </head>
     <body>
         <div>
 	       <div>
-	            <h1>Estudiantes</h1>
-	            <ul class="estudiantes">
-		            <c:forEach var="estudiante" items="${estudiantes}">
+	            <h1>Cursos</h1>
+	            <ul class="cursos">
+		            <c:forEach var="curso" items="${cursos}">
 			            <li>
-			                <p>${estudiante.nombre} ${estudiante.apellido}</p>
-			                <a href="/estudiantes/detalles/${estudiante.id}">Cursos</a>
+			                <p>${curso.nombre}</p>
+			                <a href="/cursos/detalles/${curso.id}">Estudiantes inscritos</a>
 			            </li>
 		            </c:forEach>
 	            </ul>
 	        </div>
 			<div>
-				<a href="/estudiantes/formulario/agregar">Agregar nuevo estudiante</a>
+				<a href="/cursos/formulario/agregar">Agregar nuevo curso</a>
 			</div>
 			<div>
-				<a href="/cursos">Ir a cursos</a>
+				<a href="/estudiantes">Ir a Estudiantes</a>
 			</div>
         </div>
         <script src="/js/script.js"></script>
