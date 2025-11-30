@@ -24,11 +24,8 @@
                     <c:if test="${!empty estudiante.cursos}">
                         <c:forEach var="curso" items="${estudiante.cursos}">
                             <li>
-                                <strong>Nombre: ${curso.nombre}</strong> 
-                                <ul>
-                                    <li>Fecha de inscripción: ${estudiante.fechaCreacion}</b></li>
-                                    <li><a href="/cursos/detalles/${curso.id}">(Ver Curso)</a></b></li>
-                                </ul>
+                                <strong><h4>Nombre: ${curso.nombre}</h4></strong> 
+                                <p><a href="/cursos/detalles/${curso.id}">(Ver Curso)</a></b></p>
                                 <br> 
                             </li>
                         </c:forEach>
