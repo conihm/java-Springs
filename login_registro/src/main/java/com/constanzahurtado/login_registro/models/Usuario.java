@@ -189,11 +189,6 @@ public class Usuario {
         this.fechaActualizacion = fechaActualizacion;
     }
 
-    public Object getCorreo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCorreo'");
-    }
-
     
 
 }

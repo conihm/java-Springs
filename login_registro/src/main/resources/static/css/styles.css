@@ -1,0 +1,6 @@
+.container { display: flex; justify-content: space-around; padding: 20px; }
+
+.form-box { width: 45%; border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
+.error { color: red; font-size: 0.9em; margin-left: 10px; }
+label { display: inline-block; width: 140px; font-weight: bold; }
+div { margin-bottom: 10px; }
